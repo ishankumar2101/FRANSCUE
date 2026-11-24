@@ -1,0 +1,12 @@
+test_astar_shortest (test_benchmark.BenchmarkTests.test_astar_shortest) ... ok
+test_connected_maps (test_benchmark.BenchmarkTests.test_connected_maps) ... ok
+test_offline_hit_scoring (test_benchmark.BenchmarkTests.test_offline_hit_scoring) ... ok
+test_policy_full_budget_and_valid_moves (test_benchmark.BenchmarkTests.test_policy_full_budget_and_valid_moves) ... ok
+test_repeatability (test_benchmark.BenchmarkTests.test_repeatability) ... ok
+test_sensor_distance (test_benchmark.BenchmarkTests.test_sensor_distance) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.317s
+
+OK
+Repeated benchmark: byte-identical CSVs and replay JSON.

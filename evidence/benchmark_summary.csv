@@ -1,0 +1,13 @@
+condition,method,trials,successes,success_percent,mean_capped_steps,mean_final_estimate_error_m,invalid_moves
+all,bayesian,216,185,85.65,37.51,0.86,0
+all,rssi_explore,216,97,44.91,68.48,3.69,0
+all,coverage,216,96,44.44,62.08,,0
+nominal,bayesian,72,72,100.0,28.12,0.0,0
+nominal,rssi_explore,72,31,43.06,68.04,3.66,0
+nominal,coverage,72,32,44.44,62.08,,0
+shadowed,bayesian,72,60,83.33,38.08,0.65,0
+shadowed,rssi_explore,72,36,50.0,66.1,3.25,0
+shadowed,coverage,72,32,44.44,62.08,,0
+high_noise_shadowed,bayesian,72,53,73.61,46.32,1.94,0
+high_noise_shadowed,rssi_explore,72,30,41.67,71.31,4.14,0
+high_noise_shadowed,coverage,72,32,44.44,62.08,,0

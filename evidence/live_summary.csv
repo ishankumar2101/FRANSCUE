@@ -1,0 +1,13 @@
+profile,method,trials,successes,success_percent,mean_capped_steps,mean_final_error_m,invalid_moves
+all,robust,96,92,95.83,32.22,0.23,0
+all,bayesian,96,87,90.62,32.56,0.51,0
+all,coverage,96,48,50.0,67.94,,0
+nominal,robust,32,30,93.75,32.81,0.36,0
+nominal,bayesian,32,32,100,27.66,0.0,0
+nominal,coverage,32,16,50.0,67.94,,0
+shadowed,robust,32,32,100,22.69,0.02,0
+shadowed,bayesian,32,27,84.38,33.22,0.52,0
+shadowed,coverage,32,16,50.0,67.94,,0
+challenging,robust,32,30,93.75,41.16,0.3,0
+challenging,bayesian,32,28,87.5,36.81,1.01,0
+challenging,coverage,32,16,50.0,67.94,,0

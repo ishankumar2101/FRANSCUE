@@ -1,0 +1,19 @@
+test_astar_shortest (test_benchmark.BenchmarkTests.test_astar_shortest) ... ok
+test_connected_maps (test_benchmark.BenchmarkTests.test_connected_maps) ... ok
+test_offline_hit_scoring (test_benchmark.BenchmarkTests.test_offline_hit_scoring) ... ok
+test_policy_full_budget_and_valid_moves (test_benchmark.BenchmarkTests.test_policy_full_budget_and_valid_moves) ... ok
+test_repeatability (test_benchmark.BenchmarkTests.test_repeatability) ... ok
+test_sensor_distance (test_benchmark.BenchmarkTests.test_sensor_distance) ... ok
+test_generation (test_live_engine.LiveTests.test_generation) ... ok
+test_matched_scenarios (test_live_engine.LiveTests.test_matched_scenarios) ... ok
+test_missing_measurement_retains_prior (test_live_engine.LiveTests.test_missing_measurement_retains_prior) ... ok
+test_normalisation (test_live_engine.LiveTests.test_normalisation) ... ok
+test_policy_repeatable (test_live_engine.LiveTests.test_policy_repeatable) ... ok
+test_valid_moves_and_scoring (test_live_engine.LiveTests.test_valid_moves_and_scoring) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 0.517s
+
+OK
+
+Additional verification: new benchmark reproduced identical trial and summary CSV bytes on second run. HTTP smoke test passed for HTML serving, new experiment, all 90 live steps, budget guard, coverage policy and invalid configuration. JavaScript syntax check passed with Node. Full graphical browser testing was unavailable in this environment.

@@ -1,0 +1,12 @@
+{'profile': 'all', 'method': 'robust', 'trials': 96, 'successes': 92, 'success_percent': 95.83, 'mean_capped_steps': 32.22, 'mean_final_error_m': 0.23, 'invalid_moves': 0}
+{'profile': 'all', 'method': 'bayesian', 'trials': 96, 'successes': 87, 'success_percent': 90.62, 'mean_capped_steps': 32.56, 'mean_final_error_m': 0.51, 'invalid_moves': 0}
+{'profile': 'all', 'method': 'coverage', 'trials': 96, 'successes': 48, 'success_percent': 50.0, 'mean_capped_steps': 67.94, 'mean_final_error_m': None, 'invalid_moves': 0}
+{'profile': 'nominal', 'method': 'robust', 'trials': 32, 'successes': 30, 'success_percent': 93.75, 'mean_capped_steps': 32.81, 'mean_final_error_m': 0.36, 'invalid_moves': 0}
+{'profile': 'nominal', 'method': 'bayesian', 'trials': 32, 'successes': 32, 'success_percent': 100, 'mean_capped_steps': 27.66, 'mean_final_error_m': 0.0, 'invalid_moves': 0}
+{'profile': 'nominal', 'method': 'coverage', 'trials': 32, 'successes': 16, 'success_percent': 50.0, 'mean_capped_steps': 67.94, 'mean_final_error_m': None, 'invalid_moves': 0}
+{'profile': 'shadowed', 'method': 'robust', 'trials': 32, 'successes': 32, 'success_percent': 100, 'mean_capped_steps': 22.69, 'mean_final_error_m': 0.02, 'invalid_moves': 0}
+{'profile': 'shadowed', 'method': 'bayesian', 'trials': 32, 'successes': 27, 'success_percent': 84.38, 'mean_capped_steps': 33.22, 'mean_final_error_m': 0.52, 'invalid_moves': 0}
+{'profile': 'shadowed', 'method': 'coverage', 'trials': 32, 'successes': 16, 'success_percent': 50.0, 'mean_capped_steps': 67.94, 'mean_final_error_m': None, 'invalid_moves': 0}
+{'profile': 'challenging', 'method': 'robust', 'trials': 32, 'successes': 30, 'success_percent': 93.75, 'mean_capped_steps': 41.16, 'mean_final_error_m': 0.3, 'invalid_moves': 0}
+{'profile': 'challenging', 'method': 'bayesian', 'trials': 32, 'successes': 28, 'success_percent': 87.5, 'mean_capped_steps': 36.81, 'mean_final_error_m': 1.01, 'invalid_moves': 0}
+{'profile': 'challenging', 'method': 'coverage', 'trials': 32, 'successes': 16, 'success_percent': 50.0, 'mean_capped_steps': 67.94, 'mean_final_error_m': None, 'invalid_moves': 0}
