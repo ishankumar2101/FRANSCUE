@@ -5,14 +5,20 @@
 
 A proposed SOS beacon and AI-assisted search rover for locating distress signals in indoor environments. The runnable research prototype uses synthetic BLE signal measurements, Bayesian location estimation and A* route planning. GPS/SIM updates are part of the planned hardware design.
 
-## Engineering release — live simulation
+## Open the live simulation online
+
+[**Launch FRANSCUE — Interactive AI Search Simulation**](https://ishankumar2101.github.io/FRANSCUE/)
+
+The browser version runs the original Python search engine using [Pyodide 0.27.7](https://pyodide.org/en/0.27.7/), without a local Python installation or server. First load requires internet access to fetch the Python runtime. Select an arena, RF profile, search policy and seed, then choose **New experiment** and **Run**. A [recorded replay](https://ishankumar2101.github.io/FRANSCUE/replay.html) is also available as an alternative; it does not execute new experiments. The public links require GitHub Pages to be enabled for the repository's main branch, root folder.
+
+## Engineering release — local simulation (optional)
 Run **Python 3.10+** (no third-party packages required):
 
 ```sh
 python dashboard.py
 ```
 
-Open **http://127.0.0.1:8765** in a browser. Choose a map, RF profile, seed and policy; start a new experiment and step or run the search. See the live RSSI, dropped packets, posterior heatmap, uncertainty and A* goal. The Python engine computes each step as requested; this is not a prerecorded animation. It is a controlled 2D simulation with a known map and exact grid pose, not a hardware controller or physics-based simulator.
+After the Python server starts, open `http://127.0.0.1:8765` in a browser on the same computer. Choose a map, RF profile, seed and policy; start a new experiment and step or run the search. See the live RSSI, dropped packets, posterior heatmap, uncertainty and A* goal. The Python engine computes each step as requested; this is not a prerecorded animation. It is a controlled 2D simulation with a known map and exact grid pose, not a hardware controller or physics-based simulator.
 
 ```sh
 python live_engine.py
