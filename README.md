@@ -1,114 +1,25 @@
-# FRANSCUE
-**St. Francis School | Physical AI Hackathon | Disaster Management (Robotics + AI)**
+# FRANSCUE — V4 fixed-coverage route optimization
 
-**Search • Alert • Rescue**
+## Reproduce
+Python 3.10+; install numpy, matplotlib and pillow. Run `python coverage_v4.py` from this folder. The four generated CSV files are included. Two consecutive executions produced byte-identical CSV files in the test environment.
 
-A proposed SOS beacon and AI-assisted search rover for locating distress signals in indoor environments. The runnable research prototype uses synthetic BLE signal measurements, Bayesian location estimation and A* route planning. GPS/SIM updates are part of the planned hardware design.
+## Method
+The original simulation.py is unchanged. The 24 x 16 grid (12 m x 8 m, 0.5 m cells), three obstacles, start (2,2), twelve original beacon positions, 4 dB Gaussian RSSI noise for Bayesian search, 90-move budget and 0.8 m scoring radius remain unchanged. Coverage is a fixed, map-only route, not an RSSI-informed policy. It initializes from the V3 geometric planner and makes 48,000 stochastic segment-refinement attempts (four rounds of 12,000, seed 46191). Route selection maximizes the number of free cell centers within the proximity threshold and then cumulative area coverage; it does not receive the test beacon coordinates. Final route is 90 adjacent legal moves. Offline first-hit scoring is used; misses count as 90 moves. Geometric proximity does not model occlusion or actual radio detection. Original AI and baseline use proximity stopping in the simulator.
 
-## Open the live simulation online
+## Results
+- Original Bayesian search: 12/12, 41.5833 mean capped moves.
+- Original row-by-row coverage: 3/12, 76.25 mean capped moves.
+- V4 optimized fixed route: 11/12 (91.67%), 60.25 mean capped moves.
+- V4 geometric coverage over every free cell: 273/309 (88.35%).
+- Mean capped moves are about 30.98% lower for the Bayesian search than for V4.
 
-[**Launch FRANSCUE — Interactive AI Search Simulation**](https://ishankumar2101.github.io/FRANSCUE/)
+This is a new version, not a reconstruction of missing historical evidence. The 12 positions were previously used in development; these are not independent holdout results. The V4 route was selected by geometry, not trial hits. The older presentation's 76.3 steps and 45.48% reduction belong to a different baseline and must not be combined with the V4 success rate. Shadowing/stress tests are not evaluated by this benchmark. No hardware validation is implied. Preserve the old results and label this evaluation V4.
 
-The browser version runs the original Python search engine using [Pyodide 0.27.7](https://pyodide.org/en/0.27.7/), without a local Python installation or server. First load requires internet access to fetch the Python runtime. Select an arena, RF profile, search policy and seed, then choose **New experiment** and **Run**. A [recorded replay](https://ishankumar2101.github.io/FRANSCUE/replay.html) is also available as an alternative; it does not execute new experiments. The public links require GitHub Pages to be enabled for the repository's main branch, root folder.
-
-## Engineering release — local simulation (optional)
-Run **Python 3.10+** (no third-party packages required):
-
-```sh
-python dashboard.py
-```
-
-After the Python server starts, open `http://127.0.0.1:8765` in a browser on the same computer. Choose a map, RF profile, seed and policy; start a new experiment and step or run the search. See the live RSSI, dropped packets, posterior heatmap, uncertainty and A* goal. The Python engine computes each step as requested; this is not a prerecorded animation. It is a controlled 2D simulation with a known map and exact grid pose, not a hardware controller or physics-based simulator.
-
-```sh
-python live_engine.py
-python -m unittest -v
-```
-
-### New matched benchmark (288 runs)
-| RF condition | Robust Bayesian | Nominal Bayesian | Fixed coverage |
-|---|---:|---:|---:|
-| Nominal | 30/32 | 32/32 | 16/32 |
-| Shadowed | 32/32 | 27/32 | 16/32 |
-| Challenging | 30/32 | 28/32 | 16/32 |
-| All | **92/96 (95.83%)** | 87/96 (90.62%) | 48/96 (50%) |
-
-Four layouts (three generated), three synthetic RF conditions, 90-move budget, offline 0.8 m approach criterion. Robust likelihood marginalises modelled wall attenuation and uses a broad component for noisy readings. Missing packets leave the posterior unchanged. Nominal search was stronger in the nominal case. These are not field performance measurements. See [full method](docs/LIVE_ENGINE.md), [raw data](evidence/live_trials.csv) and [test log](evidence/all_tests.txt). The existing PDF/video predate these experiments; the team must align formal submission materials and verify original-work requirements before submission.
-
-## Archived benchmark and recorded replay
-Download or clone this repository. Open `replay.html` in a browser to see nine recorded simulation cases with a probability heatmap, RSSI, rover path, selected goal and step-by-step controls. No installation is needed for the replay. This is a visual replay of actual computed traces, not a live simulator.
-
-To execute the extended simulation, use Python 3.10 or later (no third-party dependencies):
-
-```sh
-python benchmark.py
-python -m unittest -v
-python make_replay.py
-```
-
-The first command creates CSVs and replay data in `evidence/`; the third rebuilds the offline HTML. Run the older twelve-case comparison with `python -m pip install -r requirements.txt` and `python legacy/simulation.py`.
-
-## Extended benchmark results
-216 matched trials per method, 648 runs in total. Three indoor grid layouts, three RF conditions, a fixed 90-move budget and an offline 0.8 m proximity criterion.
-
-| Method | Successes | Success rate | Mean capped steps |
-|---|---:|---:|---:|
-| Bayesian search | 185/216 | 85.65% | 37.51 |
-| RSSI exploration | 97/216 | 44.91% | 68.48 |
-| Fixed coverage | 96/216 | 44.44% | 62.08 |
-
-| RF condition | Bayesian | RSSI exploration | Fixed coverage |
-|---|---:|---:|---:|
-| Nominal | 72/72 | 31/72 | 32/72 |
-| 6 dB shadowing | 60/72 | 36/72 | 32/72 |
-| 8 dB noise and 12 dB shadowing | 53/72 | 30/72 | 32/72 |
-
-All results are simulated. The evaluator scores approach distance after running the policy; a physical stop/confirmation mechanism is not yet implemented. Six automated tests check connectivity, A* routing, sensor model, movement and probability invariants, repeatability and offline scoring. See [method details](docs/METHOD.md) and [raw results](evidence/benchmark_trials.csv).
-
-## Repository contents
-- `benchmark.py` — extended reproducible simulation and three search methods.
-- `test_benchmark.py` — automated tests.
-- `make_replay.py` and `replay.html` — offline recorded-trace visualisation.
-- `evidence/` — extended results, traces and test log.
-- `legacy/` — original twelve-case simulation and earlier archived data; the extra archived stress-test CSVs do not have their exact runners.
-- `firmware/beacon/` — Arduino beacon draft; not compiled or physically tested.
-- `docs/Concept_Note.pdf` — existing three-page concept note, predating the extended benchmark.
-- `docs/HARDWARE.md` — planned hardware and physical validation.
-- `CREDITS.md` — sources and AI assistance acknowledgement.
-
-## Current readiness
-The software model is runnable. The beacon firmware is a draft, and full rover firmware, GPS/SIM integration and hardware validation remain development milestones. The project is a supervised research prototype, not a certified emergency device. No real-world localisation performance or physical TRL is claimed from the software alone. Review and understand all materials before submission and verify the event's original-work rules.
-## Latest Hardware Development — GPS and GSM
-
-FRANSCUE now includes a standalone GPS and GSM communication module.
-
-### Hardware Components
-- ESP32 microcontroller
-- NEO-6M GPS module
-- SIM800L GSM module
-- GSM antenna
-
-### Functionality
-- Receives GPS coordinates.
-- Sends latitude and longitude through SMS.
-- Includes a Google Maps location link.
-- Attempts location updates every 60 seconds when a valid GPS fix is available.
-
-### Source Code
-[GPS and SIM800L Firmware](firmware/gps_gsm/FRANSCUE_GPS_SIM800L/FRANSCUE_GPS_SIM800L.ino)
-
-### Current Development Status
-The GPS and GSM module is separate from the BLE beacon and AI-assisted search rover. Complete hardware integration and physical validation are the next development milestones.
-## Official Stage 1 Submission
-
-**IIT Bombay E-Cell — Physical AI Hackathon**
-
-- **Project:** FRANSCUE
-- **School:** St. Francis School, Deoghar
-- **Track:** Disaster Management (Robotics + AI)
-
-### Official Submission Materials
-
-- [Final Concept Note (PDF)](docs/FRANSCUE_Final_Concept_Note.pdf)
-- [Final Project Demonstration Video](https://github.com/ishankumar2101/FRANSCUE/releases/download/v1.0/FRASCUE.FINAL.ALL.mp4)
-- [Live Interactive AI Simulation](https://ishankumar2101.github.io/FRANSCUE/)
+## Files
+- `coverage_v4.py`: route optimizer and benchmark entry point.
+- `coverage_v3.py`: initial map-only route planner and scoring helpers.
+- `simulation.py`: original simulation.
+- `trials.csv`: all 12 matched trials.
+- `summary.csv`: aggregate metrics.
+- `fixed_route.csv`: 91 route coordinates including the starting point.
+- `all_free_cells.csv`: exhaustive geometric coverage score for all 309 free cells.

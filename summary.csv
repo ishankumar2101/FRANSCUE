@@ -1,0 +1,4 @@
+method,trials,successes,success_percent,mean_capped_steps
+ai,12,12,100.0,41.5833
+old_coverage,12,3,25.0,76.25
+v4_coverage,12,11,91.67,60.25
