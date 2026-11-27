@@ -99,3 +99,16 @@ FRANSCUE now includes a standalone GPS and GSM communication module.
 
 ### Current Development Status
 The GPS and GSM module is separate from the BLE beacon and AI-assisted search rover. Complete hardware integration and physical validation are the next development milestones.
+## Official Stage 1 Submission
+
+**IIT Bombay E-Cell — Physical AI Hackathon**
+
+- **Project:** FRANSCUE
+- **School:** St. Francis School, Deoghar
+- **Track:** Disaster Management (Robotics + AI)
+
+### Official Submission Materials
+
+- [Final Concept Note (PDF)](docs/FRANSCUE_Final_Concept_Note.pdf)
+- [Final Project Demonstration Video](https://github.com/ishankumar2101/FRANSCUE/releases/download/v1.0/FRASCUE.FINAL.ALL.mp4)
+- [Live Interactive AI Simulation](https://ishankumar2101.github.io/FRANSCUE/)
