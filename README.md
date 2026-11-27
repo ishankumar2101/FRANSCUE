@@ -78,3 +78,24 @@ All results are simulated. The evaluator scores approach distance after running 
 
 ## Current readiness
 The software model is runnable. The beacon firmware is a draft, and full rover firmware, GPS/SIM integration and hardware validation remain development milestones. The project is a supervised research prototype, not a certified emergency device. No real-world localisation performance or physical TRL is claimed from the software alone. Review and understand all materials before submission and verify the event's original-work rules.
+## Latest Hardware Development — GPS and GSM
+
+FRANSCUE now includes a standalone GPS and GSM communication module.
+
+### Hardware Components
+- ESP32 microcontroller
+- NEO-6M GPS module
+- SIM800L GSM module
+- GSM antenna
+
+### Functionality
+- Receives GPS coordinates.
+- Sends latitude and longitude through SMS.
+- Includes a Google Maps location link.
+- Attempts location updates every 60 seconds when a valid GPS fix is available.
+
+### Source Code
+[GPS and SIM800L Firmware](firmware/gps_gsm/FRANSCUE_GPS_SIM800L/FRANSCUE_GPS_SIM800L.ino)
+
+### Current Development Status
+The GPS and GSM module is separate from the BLE beacon and AI-assisted search rover. Complete hardware integration and physical validation are the next development milestones.
